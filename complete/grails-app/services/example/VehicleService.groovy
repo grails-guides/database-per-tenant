@@ -8,11 +8,11 @@ import org.hibernate.validator.constraints.NotBlank
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
 
-@Service(Vehicle)
-@CurrentTenant
+@Service(Vehicle) // <1>
+@CurrentTenant // <2>
 interface VehicleService {
 
-    @Join('engines')
+    @Join('engines') // <3>
     List<Vehicle> list(Map args )
 
     Integer count()
@@ -20,7 +20,7 @@ interface VehicleService {
     @Join('engines')
     Vehicle find(Long id)
 
-    Vehicle save(@NotBlank String model,
+    Vehicle save(@NotBlank String model, // <4>
                  @NotNull @Min(1980l) Integer year)
 
     Vehicle update(Long id,

@@ -2,7 +2,7 @@ package example
 
 import grails.gorm.MultiTenant
 
-class Vehicle implements MultiTenant<Vehicle>{
+class Vehicle implements MultiTenant<Vehicle> { // <1>
     String model
     Integer year
 

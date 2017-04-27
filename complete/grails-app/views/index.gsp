@@ -61,7 +61,7 @@
                 whatever content you may choose. Below is a list of controllers that are currently deployed in
                 this application, click on each to execute its default action:
             </p>
-
+            <!-- tag::iterateManufacturers[] -->
             <div id="controllers" role="navigation">
                 <h2>Available Manufacturers:</h2>
                 <ul>
@@ -72,6 +72,7 @@
                     </g:each>
                 </ul>
             </div>
+            <!-- end::iterateManufacturers[] -->
         </section>
     </div>
 

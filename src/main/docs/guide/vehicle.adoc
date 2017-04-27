@@ -1,0 +1,36 @@
+Introduced in GORM 6.1, http://gorm.grails.org/latest/hibernate/manual/index.html#dataServices[GORM Data Services] take the work out of implemented service layer
+logic by adding the ability to automatically implement abstract classes or interfaces
+using GORM logic.
+
+[source, groovy]
+.grails-app/services/example/VehicleService.groovy
+----
+include::{sourcedir}/grails-app/services/example/VehicleService.groovy[]
+----
+
+<1> Annotate it with the `grails.gorm.services.Service` annotation with the domain class the service applies to.
+<2> GORM Data Services works with Multitenancy
+<3> Specify http://gorm.grails.org/latest/hibernate/manual/index.html#_query_joins[Query Joins] using the `@Join` annotation:
+<4> GORM Data Services have built in support for `javax.validation` annotations for method parameters.
+
+As you saw in the previous code snippets,
+We can http://gorm.grails.org/latest/hibernate/manual/index.html#_validating_data_services[validate Data Service Parameters].
+If the validation fails, a `ConstraintViolationException` exception will be thrown.
+
+To ease the consumption of such an exception a trait was developed.
+
+[source, groovy]
+.src/main/groovy/example/ConstraintViolationHandler.groovy
+----
+include::{sourcedir}/src/main/groovy/example/ConstraintViolationHandler.groovy[]
+----
+
+`VehicleController` provides CRUD functionality for the `Vehicle` domain class
+with the aid of the previously described GORM Data Service. Moreover, it implements
+the previous trait. 
+
+[source, groovy]
+.grails-app/controllers/example/VehicleController.groovy
+----
+include::{sourcedir}/grails-app/controllers/example/VehicleController.groovy[]
+----

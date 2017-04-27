@@ -1,0 +1,19 @@
+In order to use multiTenancy you need to setup multiTenancy mode and the
+class which will be used to resolve the tenant in use.
+
+[source, groovy]
+.grails-app/conf/application.yml
+----
+include::{sourcedir}/grails-app/conf/application.yml[tag=grails]
+include::{sourcedir}/grails-app/conf/application.yml[tag=gorm]
+include::{sourcedir}/grails-app/conf/application.yml[tag=multiTenancy]
+----
+
+Apart from the default `dataSource`, we configure two aditional data sources
+`audi` and `ford`:
+
+[source, groovy]
+.grails-app/conf/application.yml
+----
+include::{sourcedir}/grails-app/conf/application.yml[tag=dataSources]
+----

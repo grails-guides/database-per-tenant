@@ -1,0 +1,41 @@
+The home page is mapped to the `index` action of the `Manufacturer` controller.
+[source, groovy]
+.grails-app/controllers/example/UrlMappings.groovy
+----
+include::{sourcedir}/grails-app/controllers/example/UrlMappings.groovy[tag=home, indent=0]
+----
+
+It renders to the root `index.gsp` a list of all the Manufacturers.
+
+[source, groovy]
+.grails-app/controllers/example/ManufacturerController.groovy
+----
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=packageDeclaration]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=importStatements]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=classDeclaration]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=index]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=closeBracket]
+----
+
+In the GSP, we iterate the Manufacturers and link to the `Manufacturer+ controller's `select` action
+
+[source, groovy]
+.grails-app/views/index.gsp
+----
+include::{sourcedir}/grails-app/views/index.gsp[tag=iterateManufacturers, indent=0]
+----
+
+The `select` action, selects the current tenant:
+
+[source, groovy]
+.grails-app/controllers/example/ManufacturerController.groovy
+----
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=packageDeclaration]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=importStatements]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=classDeclaration]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=select]
+include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=closeBracket]
+----
+
+<1> Fetches a Manufacturer identified by the supplied `id`
+<2> The selected tenant is flagged with a session attribute.

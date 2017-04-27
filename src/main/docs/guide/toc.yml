@@ -1,8 +1,13 @@
-gettingStarted: 
+gettingStarted:
   title: Getting Started
   requirements: What you will need
   howto: How to complete the guide
 writingTheApp:
   title: Writing the Application
+  setupMulitenancy: Setup Multitenancy
+  domainClasses: Domain Classes
+  seedData: Seed Data
+  homePage: Select Tenant
+  vehicle: Operate with Tenant
 runningTheApp:
   title: Running the Application

@@ -1,10 +1,12 @@
 package example
 
+import grails.compiler.GrailsCompileStatic
 
 import javax.validation.ConstraintViolationException
 
 import static org.springframework.http.HttpStatus.*
 
+@GrailsCompileStatic
 class VehicleController implements ConstraintViolationHandler {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

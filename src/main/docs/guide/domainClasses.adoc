@@ -1,0 +1,23 @@
+We have a domain class mapped to the default `dataSource`
+
+[source, groovy]
+.grails-app/domain/example/Manufacturer.groovy
+----
+include::{sourcedir}/grails-app/domain/example/Manufacturer.groovy[]
+----
+
+Each tenant, which will have its own database, maps two domain classes:
+
+[source, groovy]
+.grails-app/domain/example/Engine.groovy
+----
+include::{sourcedir}/grails-app/domain/example/Engine.groovy[]
+----
+
+[source, groovy]
+.grails-app/domain/example/Vehicle.groovy
+----
+include::{sourcedir}/grails-app/domain/example/Vehicle.groovy[]
+----
+
+<1> Both domain class implement the https://gorm.grails.org/latest/api/grails/gorm/MultiTenant.html[MultiTenant trait]
