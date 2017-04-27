@@ -18,7 +18,7 @@ interface VehicleService {
     Integer count()
 
     @Join('engines')
-    Vehicle find(Long id)
+    Vehicle find(Serializable id)
 
     Vehicle save(@NotBlank String model, // <4>
                  @NotNull @Min(1980l) Integer year)

@@ -6,7 +6,6 @@ import javax.validation.ConstraintViolationException
 
 import static org.springframework.http.HttpStatus.*
 
-@GrailsCompileStatic
 class VehicleController implements ConstraintViolationHandler {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -50,11 +49,12 @@ class VehicleController implements ConstraintViolationHandler {
 
     def update(Long id, String model, Integer year) {
         try {
-            Vehicle vehicle = vehicleService.update(id, model, year)
+            Vehicle vehicle = vehicleService.find(id)
             if (vehicle == null) {
                 notFound()
             }
             else {
+                vehicleService.update(id, model, year)
                 request.withFormat {
                     form multipartForm {
                         flash.message = message(code: 'default.updated.message', args: [message(code: 'vehicle.label', default: 'Vehicle'), vehicle.id])

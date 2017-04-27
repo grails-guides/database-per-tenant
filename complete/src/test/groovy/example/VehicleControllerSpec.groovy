@@ -1,18 +1,29 @@
 package example
 
+import grails.gorm.transactions.Rollback
+import grails.test.hibernate.HibernateSpec
 import grails.test.mixin.*
-import spock.lang.*
+import org.grails.datastore.mapping.config.Settings
+import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
+import org.grails.datastore.mapping.multitenancy.resolvers.SystemPropertyTenantResolver
 
 @TestFor(VehicleController)
-@Mock(Vehicle)
-class VehicleControllerSpec extends Specification {
+class VehicleControllerSpec extends HibernateSpec {
 
-    def populateValidParams(params) {
-        assert params != null
+    @Override
+    Map getConfiguration() {
+        [(Settings.SETTING_MULTI_TENANT_RESOLVER_CLASS): SystemPropertyTenantResolver]
+    }
 
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+    VehicleService vehicleService
+    def setup() {
+        System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "audi")
+        vehicleService = hibernateDatastore.getService(VehicleService)
+        controller.vehicleService = vehicleService
+    }
+
+    def cleanup() {
+        System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "")
     }
 
     void "Test the index action returns the correct model"() {
@@ -23,6 +34,17 @@ class VehicleControllerSpec extends Specification {
         then:"The model is correct"
             !model.vehicleList
             model.vehicleCount == 0
+    }
+
+    void "Test the index action with no tenant id"() {
+        when:"there is no tenant id"
+        System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "")
+        controller.index()
+
+        then:
+        thrown(TenantNotFoundException)
+
+
     }
 
     void "Test the create action returns the correct model"() {
@@ -38,9 +60,7 @@ class VehicleControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def vehicle = new Vehicle()
-            vehicle.validate()
-            controller.save(vehicle)
+            controller.save("", 1900)
 
         then:"The create view is rendered again with the correct model"
             model.vehicle!= null
@@ -48,78 +68,46 @@ class VehicleControllerSpec extends Specification {
 
         when:"The save action is executed with a valid instance"
             response.reset()
-            populateValidParams(params)
-            vehicle = new Vehicle(params)
-
-            controller.save(vehicle)
+            controller.save("A5", 2011)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/vehicle/show/1'
+            response.redirectedUrl == '/vehicles/1'
             controller.flash.message != null
-            Vehicle.count() == 1
+            vehicleService.count() == 1
     }
 
-    void "Test that the show action returns the correct model"() {
+    void "Test that the show action returns 404 for an invalid id"() {
         when:"The show action is executed with a null domain"
             controller.show(null)
 
         then:"A 404 error is returned"
             response.status == 404
-
-        when:"A domain instance is passed to the show action"
-            populateValidParams(params)
-            def vehicle = new Vehicle(params)
-            controller.show(vehicle)
-
-        then:"A model is populated containing the domain instance"
-            model.vehicle == vehicle
-    }
-
-    void "Test that the edit action returns the correct model"() {
-        when:"The edit action is executed with a null domain"
-            controller.edit(null)
-
-        then:"A 404 error is returned"
-            response.status == 404
-
-        when:"A domain instance is passed to the edit action"
-            populateValidParams(params)
-            def vehicle = new Vehicle(params)
-            controller.edit(vehicle)
-
-        then:"A model is populated containing the domain instance"
-            model.vehicle == vehicle
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
         when:"Update is called for a domain instance that doesn't exist"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'PUT'
-            controller.update(null)
+            controller.update(999,"A5", 2011)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/vehicle/index'
+            response.redirectedUrl == '/vehicles'
             flash.message != null
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def vehicle = new Vehicle()
-            vehicle.validate()
-            controller.update(vehicle)
+            controller.update(1, "A5", 1900)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.vehicle == vehicle
+            model.vehicle instanceof Vehicle
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
-            populateValidParams(params)
-            vehicle = new Vehicle(params).save(flush: true)
-            controller.update(vehicle)
+        controller.update(1, "A5", 2012)
 
         then:"A redirect is issued to the show action"
-            vehicle != null
-            response.redirectedUrl == "/vehicle/show/$vehicle.id"
+            response.redirectedUrl == "/vehicles/1"
             flash.message != null
     }
 
@@ -130,23 +118,17 @@ class VehicleControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/vehicle/index'
+            response.redirectedUrl == '/vehicles'
             flash.message != null
+            vehicleService.count() == 1
 
         when:"A domain instance is created"
             response.reset()
-            populateValidParams(params)
-            def vehicle = new Vehicle(params).save(flush: true)
-
-        then:"It exists"
-            Vehicle.count() == 1
-
-        when:"The domain instance is passed to the delete action"
-            controller.delete(vehicle)
+            controller.delete(1)
 
         then:"The instance is deleted"
-            Vehicle.count() == 0
-            response.redirectedUrl == '/vehicle/index'
+            vehicleService.count() == 0
+            response.redirectedUrl == '/vehicles'
             flash.message != null
     }
 }
