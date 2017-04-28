@@ -16,5 +16,6 @@ writingTheApp:
     title: Writing Multi-Tenant Aware Data Logic
     readingData: Executing Multi-Tenant Aware Queries
     writingData: Executing Multi-Tenant Updates
+testingTheApp: Multi-Tenancy Unit Testing
 runningTheApp:
   title: Running the Application

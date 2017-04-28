@@ -6,25 +6,34 @@ import org.grails.datastore.mapping.config.Settings
 import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
 import org.grails.datastore.mapping.multitenancy.resolvers.SystemPropertyTenantResolver
 
+// tag::class[]
 @TestFor(VehicleController)
 class VehicleControllerSpec extends HibernateSpec {
+// end::class[]    
 
+    // tag::config[]
     @Override
     Map getConfiguration() {
         [(Settings.SETTING_MULTI_TENANT_RESOLVER_CLASS): SystemPropertyTenantResolver]
     }
+    // end::config[]
 
-    VehicleService vehicleService
+    // tag::setup[]
+    VehicleService vehicleService // <1>
     def setup() {
-        System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "audi")
-        vehicleService = hibernateDatastore.getService(VehicleService)
-        controller.vehicleService = vehicleService
+        System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "audi") // <2>
+        vehicleService = hibernateDatastore.getService(VehicleService) // <3>
+        controller.vehicleService = vehicleService // <4>
     }
+    // end::setup[]
 
+    // tag::cleanup[]
     def cleanup() {
         System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "")
     }
+    // end::cleanup[]
 
+    // tag::index[]
     void "Test the index action returns the correct model"() {
 
         when:"The index action is executed"
@@ -34,7 +43,10 @@ class VehicleControllerSpec extends HibernateSpec {
             !model.vehicleList
             model.vehicleCount == 0
     }
+    // end::index[]
 
+
+    // tag::noTenant[]
     void "Test the index action with no tenant id"() {
         when:"there is no tenant id"
         System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "")
@@ -45,6 +57,7 @@ class VehicleControllerSpec extends HibernateSpec {
 
 
     }
+    // end::noTenant[]
 
     void "Test the create action returns the correct model"() {
         when:"The create action is executed"
@@ -54,6 +67,7 @@ class VehicleControllerSpec extends HibernateSpec {
             model.vehicle!= null
     }
 
+    // tag::save[]
     void "Test the save action correctly persists an instance"() {
 
         when:"The save action is executed with an invalid instance"
@@ -74,6 +88,7 @@ class VehicleControllerSpec extends HibernateSpec {
             controller.flash.message != null
             vehicleService.count() == 1
     }
+    // end::save[]
 
     void "Test that the show action returns 404 for an invalid id"() {
         when:"The show action is executed with a null domain"
