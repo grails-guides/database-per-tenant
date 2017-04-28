@@ -1,6 +1,5 @@
 package example
 
-import grails.gorm.transactions.Rollback
 import grails.test.hibernate.HibernateSpec
 import grails.test.mixin.*
 import org.grails.datastore.mapping.config.Settings

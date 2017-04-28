@@ -3,29 +3,37 @@ package example
 import grails.gorm.multitenancy.CurrentTenant
 import grails.gorm.services.Join
 import grails.gorm.services.Service
-import org.hibernate.validator.constraints.NotBlank
-
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotNull
+import grails.gorm.transactions.Transactional
+import groovy.transform.CompileStatic
 
 @Service(Vehicle) // <1>
 @CurrentTenant // <2>
-interface VehicleService {
+@CompileStatic
+abstract class VehicleService {
 
     @Join('engines') // <3>
-    List<Vehicle> list(Map args )
+    abstract List<Vehicle> list(Map args )
 
-    Integer count()
+    abstract Integer count()
 
     @Join('engines')
-    Vehicle find(Serializable id)
+    abstract Vehicle find(Serializable id)
 
-    Vehicle save(@NotBlank String model, // <4>
-                 @NotNull @Min(1980l) Integer year)
+    abstract Vehicle save(String model, // <4>
+                            Integer year)
 
-    Vehicle update(Long id,
-                   @NotBlank String model,
-                   @NotNull @Min(1980l) Integer year)
+    @Transactional
+    Vehicle update( Serializable id, // <5>
+                    String model,
+                    Integer year) {
+        Vehicle vehicle = find(id)
+        if(vehicle != null) {
+            vehicle.model = model
+            vehicle.year = year
+            vehicle.save(failOnError:true)
+        }
+        return vehicle
+    }
 
-    Vehicle delete(Long id)
+    abstract Vehicle delete(Serializable id)
 }

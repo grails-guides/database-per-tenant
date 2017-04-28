@@ -1,7 +1,0 @@
-We save two Manufacturers when the app starts
-
-[source, groovy]
-.grails-app/controllers/example/Application.groovy
-----
-include::{sourcedir}/grails-app/init/example/Application.groovy[]
-----

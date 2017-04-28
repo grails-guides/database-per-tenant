@@ -1,11 +1,23 @@
-The home page is mapped to the `index` action of the `Manufacturer` controller.
+The first step to supporting Multi-Tenancy in your application is implementing some form of tenant selection. This could be a to resolve the tenant via a DNS subdomain, or it could be part of your applications registration process if you are using authentication with Spring Security.
+
+To keep things simple for the example we are going to implement a simple mechanism that uses a view and stores the `tenantId` within the users HTTP session.
+
+First create a new `ManufacturerController` use `create-controller` or your preferred IDE:
+
+[source,bash]
+----
+$ grails create-controller Manufacturer
+----
+
+Next modify the `UrlMappings.groovy` file to map the root of the application to the `index` action:
+
 [source, groovy]
 .grails-app/controllers/example/UrlMappings.groovy
 ----
 include::{sourcedir}/grails-app/controllers/example/UrlMappings.groovy[tag=home, indent=0]
 ----
 
-It renders to the root `index.gsp` a list of all the Manufacturers.
+Then define an `index` action that lists of all the Manufacturers and renders the `grails-app/views/index.gsp` view.
 
 [source, groovy]
 .grails-app/controllers/example/ManufacturerController.groovy
@@ -17,7 +29,7 @@ include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groov
 include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groovy[tag=closeBracket]
 ----
 
-In the GSP, we iterate the Manufacturers and link to the `Manufacturer+ controller's `select` action
+Within the GSP, simply iterate through each result and create a link to the `select` action
 
 [source, groovy]
 .grails-app/views/index.gsp
@@ -25,7 +37,7 @@ In the GSP, we iterate the Manufacturers and link to the `Manufacturer+ controll
 include::{sourcedir}/grails-app/views/index.gsp[tag=iterateManufacturers, indent=0]
 ----
 
-The `select` action, selects the current tenant:
+The `select` action, selects the current tenant and stores the tenant within the current user's HTTP session:
 
 [source, groovy]
 .grails-app/controllers/example/ManufacturerController.groovy
@@ -38,4 +50,14 @@ include::{sourcedir}/grails-app/controllers/example/ManufacturerController.groov
 ----
 
 <1> Fetches a Manufacturer identified by the supplied `id`
-<2> The selected tenant is flagged with a session attribute.
+<2> The selected tenant is stored within a session attribute.
+
+Finally, to improve error handling you can map every occurrence of `TenantNotFoundException` to redirect back to the list of manufacturers:
+
+[source, groovy]
+.grails-app/controllers/example/UrlMappings.groovy
+----
+include::{sourcedir}/grails-app/controllers/example/UrlMappings.groovy[tag=noTenant, indent=0]
+----
+
+Now that it is possible to select a tenant, lets create a logic that is able to use the currently active tenant.

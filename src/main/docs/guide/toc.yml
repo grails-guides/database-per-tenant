@@ -4,10 +4,14 @@ gettingStarted:
   howto: How to complete the guide
 writingTheApp:
   title: Writing the Application
-  setupMulitenancy: Setup Multitenancy
-  domainClasses: Domain Classes
-  seedData: Seed Data
-  homePage: Select Tenant
+  setupMultitenancy:
+    title: Setup Multi-Tenancy
+    multiTenancyMode: The Multi-Tenancy Mode
+    multiTenancyResolver: The TenantResolver
+    dataSources: Multiple Data Sources
+  domainClasses: Creating the Domain Classes
+  seedData: Setup Test Data
+  homePage: Implementing Tenant Selection
   vehicle: Operate with Tenant
 runningTheApp:
   title: Running the Application
