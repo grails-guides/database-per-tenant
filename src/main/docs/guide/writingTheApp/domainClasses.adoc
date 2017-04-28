@@ -1,4 +1,4 @@
-When creating domain classes for your application you will typically have domain classes that are Multi-Tennat and others that are not.
+When creating domain classes for your application you will typically have domain classes that are Multi-Tenant and others that are not.
 
 For domain classes which won't be using Multi-Tenancy simply define them as you would normally do and they will be mapped to the default `dataSource`.
 

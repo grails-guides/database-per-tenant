@@ -16,9 +16,11 @@ class UrlMappings {
         // tag::manufacturerSelect[]
         "/manufacturer/$id"(controller: "manufacturer",action: "select")
         // end::manufacturerSelect[]
+
         // tag::vehicles[]
         "/vehicles"(resources:'vehicle')
         // end::vehicles[]
+
         "500"(view:'/error')
         "404"(view:'/notFound')
 

@@ -1,17 +1,19 @@
 package example
 
-import grails.compiler.GrailsCompileStatic
+// tag::class[]
 import grails.gorm.multitenancy.CurrentTenant
 import grails.validation.ValidationException
+import groovy.transform.CompileStatic
 
 import static org.springframework.http.HttpStatus.*
 
-@GrailsCompileStatic
+@CompileStatic
 class VehicleController  {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     VehicleService vehicleService
+// end::class[]
 
     // tag::index[]
     def index(Integer max) {
@@ -66,6 +68,10 @@ class VehicleController  {
             respond e.errors, view:'edit'
         }
     }
+
+    protected void notFound() {
+        render status: NOT_FOUND
+    }
     // end::update[]
 
     // tag::delete[]
@@ -81,7 +87,5 @@ class VehicleController  {
     }
     // end::delete[]
 
-    protected void notFound() {
-        render status: NOT_FOUND
-    }
+
 }

@@ -4,12 +4,13 @@ package example
 
 // tag::importStatements[]
 import grails.gorm.transactions.ReadOnly
-import grails.compiler.GrailsCompileStatic
+import groovy.transform.CompileStatic
 import org.grails.datastore.mapping.multitenancy.web.SessionTenantResolver
+
 // end::importStatements[]
 
 // tag::classDeclaration[]
-@GrailsCompileStatic
+@CompileStatic
 class ManufacturerController {
 // end::classDeclaration[]
 

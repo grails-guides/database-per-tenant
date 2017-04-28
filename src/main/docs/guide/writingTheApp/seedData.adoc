@@ -9,3 +9,5 @@ include::{sourcedir}/grails-app/init/example/Application.groovy[]
 <1> Implement the `ApplicationRunner` interface
 <2> Mark the `run` method as transactional with `@Transactional`
 <3> Use `saveAll` to save two `Manufacturer` instances
+
+In the example about two `Manufacturer` instances are saved that will correspond to the two tenants supported by this application. The names `Audi` and `Ford` are used and correspond to the names of the data sources configured in `grails-app/conf/application.yml`.

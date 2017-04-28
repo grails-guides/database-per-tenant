@@ -11,7 +11,10 @@ writingTheApp:
     dataSources: Multiple Data Sources
   domainClasses: Creating the Domain Classes
   seedData: Setup Test Data
-  homePage: Implementing Tenant Selection
-  vehicle: Operate with Tenant
+  tenantSelection: Implementing Tenant Selection
+  multiTenantLogic:
+    title: Writing Multi-Tenant Aware Data Logic
+    readingData: Executing Multi-Tenant Aware Queries
+    writingData: Executing Multi-Tenant Updates
 runningTheApp:
   title: Running the Application

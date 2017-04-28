@@ -1,4 +1,4 @@
-In order to use Multi-Tenancy you need to setup the Multi-Tenancy mode that GORM uses since three distinct modes are supported:
+In order to use Multi-Tenancy you need to setup the Multi-Tenancy mode that GORM uses, given that three distinct modes are supported:
 
 * link:{gormapi}/org/grails/datastore/mapping/multitenancy/MultiTenancySettings.MultiTenancyMode.html#DATABASE[DATABASE] - Use a distinct database connection per tenant
 * link:{gormapi}/org/grails/datastore/mapping/multitenancy/MultiTenancySettings.MultiTenancyMode.html#SCHEMA[SCHEMA] - Use a single database, but different physical schemas per tenant
