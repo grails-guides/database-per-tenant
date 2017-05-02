@@ -38,7 +38,7 @@ include::{sourcedir}/src/test/groovy/example/VehicleControllerSpec.groovy[tags=s
 <3> Lookup the `VehicleService` implementation from GORM
 <4> Assign the `VehicleService` to the controller under test
 
-To ensure property cleanup you should also clear the tenant id in a `cleanup` method:
+To ensure proper cleanup you should also clear the tenant id in a `cleanup` method:
 
 [source, groovy]
 .src/test/groovy/example/VehicleControllerSpec.groovy
