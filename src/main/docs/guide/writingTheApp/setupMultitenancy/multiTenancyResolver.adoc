@@ -1,4 +1,4 @@
-Note that, in additional to the mode, the above example configures the `tenantResolverClass` to use to resolve the tenant.
+Note that, in addition to the mode, the above example configures the `tenantResolverClass` to use to resolve the tenant.
 
 The `tenantResolverClass` is a class that implements the link:{gormapi}/org/grails/datastore/mapping/multitenancy/TenantResolver.html[TenantResolver] interface.
 
