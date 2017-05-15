@@ -7,7 +7,6 @@ import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 import groovy.transform.CompileStatic
 
-
 @Service(Vehicle) // <1>
 @CurrentTenant // <2>
 @CompileStatic
@@ -28,7 +27,6 @@ abstract class VehicleService {
     // tag::save[]
     abstract Vehicle save(String model,
                             Integer year)
-
     // end::save[]
 
     // tag::update[]
@@ -37,12 +35,12 @@ abstract class VehicleService {
                     String model,
                     Integer year) {
         Vehicle vehicle = find(id)
-        if(vehicle != null) {
+        if (vehicle != null) {
             vehicle.model = model
             vehicle.year = year
             vehicle.save(failOnError:true)
         }
-        return vehicle
+        vehicle
     }
     // end::update[]
 

@@ -1,16 +1,15 @@
 package example
 
 // tag::class[]
+import static org.springframework.http.HttpStatus.NOT_FOUND
 import grails.gorm.multitenancy.CurrentTenant
 import grails.validation.ValidationException
 import groovy.transform.CompileStatic
 
-import static org.springframework.http.HttpStatus.*
-
 @CompileStatic
 class VehicleController  {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
     VehicleService vehicleService
 // end::class[]
@@ -18,7 +17,7 @@ class VehicleController  {
     // tag::index[]
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond vehicleService.list(params), model:[vehicleCount: vehicleService.count()]
+        respond vehicleService.list(params), model: [vehicleCount: vehicleService.count()]
     }
     // end::index[]
 
@@ -45,10 +44,10 @@ class VehicleController  {
     def save(String model, Integer year) {
         try {
             Vehicle vehicle = vehicleService.save(model, year)
-            flash.message = "Vehicle created"
+            flash.message = 'Vehicle created'
             redirect vehicle
         } catch (ValidationException e) {
-            respond e.errors, view:'create'
+            respond e.errors, view: 'create'
         }
     }
     // end::save[]
@@ -61,11 +60,11 @@ class VehicleController  {
                 notFound()
             }
             else {
-                flash.message = "Vehicle updated"
+                flash.message = 'Vehicle updated'
                 redirect vehicle
             }
         } catch (ValidationException e) {
-            respond e.errors, view:'edit'
+            respond e.errors, view: 'edit'
         }
     }
 
@@ -81,11 +80,9 @@ class VehicleController  {
             notFound()
         }
         else {
-            flash.message = "Vehicle Deleted"
-            redirect action:"index", method:"GET"
+            flash.message = 'Vehicle Deleted'
+            redirect action: 'index', method: 'GET'
         }
     }
     // end::delete[]
-
-
 }

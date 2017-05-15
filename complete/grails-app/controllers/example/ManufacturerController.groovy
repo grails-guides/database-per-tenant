@@ -1,11 +1,11 @@
 // tag::packageDeclaration[]
 package example
-// end::packageDeclaration[]
 
+// end::packageDeclaration[]
 // tag::importStatements[]
+import org.grails.datastore.mapping.multitenancy.web.SessionTenantResolver
 import grails.gorm.transactions.ReadOnly
 import groovy.transform.CompileStatic
-import org.grails.datastore.mapping.multitenancy.web.SessionTenantResolver
 
 // end::importStatements[]
 
