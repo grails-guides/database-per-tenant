@@ -69,7 +69,8 @@ class VehicleController  {
     }
 
     protected void notFound() {
-        render status: NOT_FOUND
+        flash.message = 'Vehicle not found'
+        redirect uri: '/vehicles', status: NOT_FOUND
     }
     // end::update[]
 

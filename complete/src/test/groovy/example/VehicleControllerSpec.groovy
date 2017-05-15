@@ -5,8 +5,10 @@ import grails.test.mixin.TestFor
 import org.grails.datastore.mapping.config.Settings
 import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
 import org.grails.datastore.mapping.multitenancy.resolvers.SystemPropertyTenantResolver
+import spock.lang.Stepwise
 
 // tag::class[]
+@Stepwise
 @TestFor(VehicleController)
 class VehicleControllerSpec extends HibernateSpec {
 // end::class[]
