@@ -17,6 +17,7 @@ writingTheApp:
     readingData: Executing Multi-Tenant Aware Queries
     writingData: Executing Multi-Tenant Updates
 testingTheApp: Multi-Tenancy Unit Testing
+integrationTest: Functional Tests
 runningTheApp:
   title: Running the Application
 helpWithGrails:
