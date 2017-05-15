@@ -14,7 +14,7 @@ class UrlMappings {
         // end::noTenant[]
 
         // tag::manufacturerSelect[]
-        '/manufacturer/$id'(controller: 'manufacturer', action: 'select')
+        "/manufacturer/$id"(controller: 'manufacturer', action: 'select')
         // end::manufacturerSelect[]
 
         // tag::vehicles[]

@@ -9,3 +9,7 @@ codenarc {
 codenarcTest {
     configFile = file("${project.projectDir}/config/codenarc/testrules.groovy")
 }
+
+codenarcIntegrationTest {
+    configFile = file("${project.projectDir}/config/codenarc/testrules.groovy")
+}
