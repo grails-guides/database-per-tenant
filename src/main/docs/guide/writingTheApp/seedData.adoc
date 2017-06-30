@@ -1,7 +1,7 @@
 To setup some test data you can modify the `Application` class to implement the `ApplicationRunner` interface to run transactional logic on startup:
 
 [source, groovy]
-.grails-app/controllers/example/Application.groovy
+.grails-app/init/example/Application.groovy
 ----
 include::{sourcedir}/grails-app/init/example/Application.groovy[]
 ----
