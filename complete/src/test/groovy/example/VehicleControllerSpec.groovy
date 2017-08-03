@@ -1,7 +1,7 @@
 package example
 
 import grails.test.hibernate.HibernateSpec
-import grails.test.mixin.TestFor
+import grails.testing.web.controllers.ControllerUnitTest
 import org.grails.datastore.mapping.config.Settings
 import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
 import org.grails.datastore.mapping.multitenancy.resolvers.SystemPropertyTenantResolver
@@ -9,8 +9,7 @@ import spock.lang.Stepwise
 
 // tag::class[]
 @Stepwise
-@TestFor(VehicleController)
-class VehicleControllerSpec extends HibernateSpec {
+class VehicleControllerSpec extends HibernateSpec implements ControllerUnitTest<VehicleController> {
 // end::class[]
 
     // tag::config[]

@@ -1,7 +1,7 @@
 package example
 
 import geb.spock.GebSpec
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 
 @Integration
 class TenantSelectionFuncSpec extends GebSpec {
