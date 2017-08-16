@@ -1,4 +1,4 @@
-Since the application requires GORM 6.1.x the first step is to set your GORM version within `gradle.properties`:
+Since the application requires GORM 6.1.x, the first step is to set your GORM version within `gradle.properties`:
 
 [source, groovy]
 .gradle.properties
