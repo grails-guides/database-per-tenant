@@ -200,11 +200,11 @@ ruleset {
     // rulesets/grails.xml
     //GrailsDomainHasEquals
     //GrailsDomainHasToString
-    GrailsDomainReservedSqlKeywordName 
+    //GrailsDomainReservedSqlKeywordName 
     GrailsDomainWithServiceReference 
     GrailsDuplicateConstraint 
     GrailsDuplicateMapping 
-    GrailsMassAssignment 
+    //GrailsMassAssignment 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
     GrailsSessionReference   // DEPRECATED
@@ -301,7 +301,7 @@ ruleset {
     ClassNameSameAsFilename 
     ClassNameSameAsSuperclass 
     ConfusingMethodName 
-    FactoryMethodName 
+    //FactoryMethodName 
     FieldName 
     InterfaceName 
     InterfaceNameSameAsSuperInterface 
