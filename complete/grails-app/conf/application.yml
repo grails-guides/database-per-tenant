@@ -109,13 +109,13 @@ dataSource:
     username: sa
     password: ''
     dbCreate: create-drop
-    url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
 
 dataSources:
     ford:
       dbCreate: create-drop
-      url: jdbc:h2:mem:fordDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+      url: jdbc:h2:mem:fordDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     audi:
       dbCreate: create-drop
-      url: jdbc:h2:mem:audiDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+      url: jdbc:h2:mem:audiDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
 # end::dataSources[]
