@@ -1,3 +1,0 @@
-In this guide you are going to build a Multi-Tenant application that utilizes "Database per Tenant" with Grails and GORM 6.1.
-
-Database per tenant allows you to redirect different tenants (users) to different physical databases using a unique tenant identifier.
