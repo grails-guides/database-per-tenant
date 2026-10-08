@@ -27,7 +27,7 @@ Then browse to http://localhost:8080/, select a manufacturer, and create vehicle
 
 | Branch | Grails version |
 |---|---|
-| `grails8` | Apache Grails 8.0.0-M5 |
+| `grails8` | Apache Grails 8.0.0 |
 | `grails5` | Apache Grails 5 (published guide baseline) |
 
 ## Guide prose
